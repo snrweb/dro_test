@@ -309,7 +309,7 @@ class _ProductDetailState extends State<ProductDetail> {
                               ),
                             ),
                             Text(
-                              "${product.size}",
+                              "${product.productID}",
                               style: TextStyle(
                                 fontSize: 14,
                                 color:
@@ -425,7 +425,7 @@ class _ProductDetailState extends State<ProductDetail> {
                             children: [
                               AlertDialog(
                                 content: Container(
-                                  height: 220,
+                                  height: 235,
                                   child: Column(
                                     children: [
                                       SizedBox(height: 20),

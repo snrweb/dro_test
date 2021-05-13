@@ -72,7 +72,7 @@ List<Map<String, String>> products = [
     "updatedAt": "",
   },
   {
-    "productID": "2",
+    "productID": "5",
     "productName": "Kezitil",
     "otherName": "Cefuroxime Axetil",
     "weightInfo": "Tablet - 250mg",
@@ -90,7 +90,7 @@ List<Map<String, String>> products = [
     "updatedAt": "",
   },
   {
-    "productID": "3",
+    "productID": "6",
     "productName": "Garlic Oil",
     "otherName": "Garlic Oil",
     "weightInfo": "Soft Gel - 650mg",
