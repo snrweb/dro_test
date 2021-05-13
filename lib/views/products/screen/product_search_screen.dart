@@ -1,4 +1,6 @@
+import 'package:dro_test/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../controllers/product_provider.dart';
 import '../../../schemas/product_schema.dart';
@@ -26,6 +28,7 @@ class _ProductSearchScreenState extends State<ProductSearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(Constants.UI_OVERLAY);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).primaryColorLight,
@@ -49,127 +52,130 @@ class _ProductSearchScreenState extends State<ProductSearchScreen> {
             ),
           ),
         ),
-        body: Column(
-          children: [
-            Container(
-              height: 80,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[100],
-                      borderRadius: BorderRadius.circular(50),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                height: 80,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[100],
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: IconButton(
+                          icon: Icon(
+                            Icons.import_export_outlined,
+                            size: 24,
+                          ),
+                          onPressed: () {}),
                     ),
-                    child: IconButton(
-                        icon: Icon(
-                          Icons.import_export_outlined,
-                          size: 24,
-                        ),
-                        onPressed: () {}),
-                  ),
-                  SizedBox(width: 20),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[100],
-                      borderRadius: BorderRadius.circular(50),
+                    SizedBox(width: 20),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[100],
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: IconButton(
+                          icon: Icon(
+                            Icons.filter_alt_outlined,
+                            size: 24,
+                          ),
+                          onPressed: () {}),
                     ),
-                    child: IconButton(
-                        icon: Icon(
-                          Icons.filter_alt_outlined,
-                          size: 24,
-                        ),
-                        onPressed: () {}),
-                  ),
-                  SizedBox(width: 20),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[100],
-                      borderRadius: BorderRadius.circular(50),
+                    SizedBox(width: 20),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[100],
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: IconButton(
+                          icon: Icon(
+                            Icons.search_outlined,
+                            size: 24,
+                          ),
+                          onPressed: () {}),
                     ),
-                    child: IconButton(
-                        icon: Icon(
-                          Icons.search_outlined,
-                          size: 24,
-                        ),
-                        onPressed: () {}),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              child: TextField(
-                style: TextStyle(color: Color(0xff27214D)),
-                autofocus: true,
-                cursorColor: Color(0xff27214D),
-                decoration: InputDecoration(
-                  hintText: 'Search for crowdfunds',
-                  hintStyle: TextStyle(color: Color(0xff86869E)),
-                  filled: true,
-                  fillColor: Color(0xffF3F4F9),
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: Color(0xff86869E),
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(40),
-                    borderSide: BorderSide(
-                      width: 0,
-                      style: BorderStyle.none,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(40),
-                    borderSide: BorderSide(
-                      width: 0,
-                      style: BorderStyle.none,
-                    ),
-                  ),
-                  contentPadding: EdgeInsets.symmetric(
-                    vertical: 20,
-                    horizontal: 20,
-                  ),
+                  ],
                 ),
-                onChanged: (value) {
-                  if (value.length > 2) {
-                    setState(() {
-                      _products = _productProvider.search(value).asStream();
-                    });
-                  }
-                },
               ),
-            ),
-            Container(
-              height: MediaQuery.of(context).size.height - 230,
-              child: StreamBuilder<List<ProductSchema>>(
-                  stream: _products,
-                  builder: (context, snapshot) {
-                    totalProduct = snapshot.hasData ? snapshot.data.length : 0;
-                    return snapshot.hasData
-                        ? GridView.builder(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 5),
-                            gridDelegate:
-                                new SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              mainAxisSpacing: 10,
-                              crossAxisSpacing: 30,
-                              childAspectRatio: 3 / 4.6,
-                            ),
-                            itemCount: snapshot.data.length,
-                            itemBuilder: (context, index) {
-                              return ChangeNotifierProvider.value(
-                                value: snapshot.data[index],
-                                child: ProductItem(
-                                    scaffoldKey: _scaffoldKey,
-                                    productProvider: _productProvider),
-                              );
-                            },
-                          )
-                        : MyCircularProgressIndicator();
-                  }),
-            ),
-          ],
+              Container(
+                child: TextField(
+                  style: TextStyle(color: Color(0xff27214D)),
+                  autofocus: true,
+                  cursorColor: Color(0xff27214D),
+                  decoration: InputDecoration(
+                    hintText: 'Search for crowdfunds',
+                    hintStyle: TextStyle(color: Color(0xff86869E)),
+                    filled: true,
+                    fillColor: Color(0xffF3F4F9),
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Color(0xff86869E),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(40),
+                      borderSide: BorderSide(
+                        width: 0,
+                        style: BorderStyle.none,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(40),
+                      borderSide: BorderSide(
+                        width: 0,
+                        style: BorderStyle.none,
+                      ),
+                    ),
+                    contentPadding: EdgeInsets.symmetric(
+                      vertical: 16,
+                      horizontal: 8,
+                    ),
+                  ),
+                  onChanged: (value) {
+                    if (value.length > 2) {
+                      setState(() {
+                        _products = _productProvider.search(value).asStream();
+                      });
+                    }
+                  },
+                ),
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height - 230,
+                child: StreamBuilder<List<ProductSchema>>(
+                    stream: _products,
+                    builder: (context, snapshot) {
+                      totalProduct =
+                          snapshot.hasData ? snapshot.data.length : 0;
+                      return snapshot.hasData
+                          ? GridView.builder(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 5),
+                              gridDelegate:
+                                  new SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 10,
+                                crossAxisSpacing: 30,
+                                childAspectRatio: 3 / 4.6,
+                              ),
+                              itemCount: snapshot.data.length,
+                              itemBuilder: (context, index) {
+                                return ChangeNotifierProvider.value(
+                                  value: snapshot.data[index],
+                                  child: ProductItem(
+                                      scaffoldKey: _scaffoldKey,
+                                      productProvider: _productProvider),
+                                );
+                              },
+                            )
+                          : MyCircularProgressIndicator();
+                    }),
+              ),
+            ],
+          ),
         ),
       ),
     );

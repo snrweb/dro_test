@@ -2,14 +2,11 @@ import 'package:dro_test/constants/constants.dart';
 import 'package:dro_test/views/products/components/cart_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import '../../../widget/loader_item.dart';
-import './product_search_screen.dart';
 import '../../../controllers/product_provider.dart';
 import '../../../schemas/product_schema.dart';
-
-import '../../products/components/product_item.dart';
 
 class CartScreen extends StatefulWidget {
   static const routeName = '/cart';
@@ -34,6 +31,7 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(Constants.UI_OVERLAY);
     _productProvider = Provider.of<ProductProvider>(context);
     var formatPrice = NumberFormat.currency(locale: "en_US", name: "N");
 

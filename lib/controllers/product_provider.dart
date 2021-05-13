@@ -40,10 +40,9 @@ class ProductProvider extends ChangeNotifier {
 
   Future<List<ProductSchema>> search(productName) async {
     final res = await ProductModel().searchProductByName(productName);
-    List<ProductSchema> items = setProduct(res);
-    searchedProductsList = items;
+    searchedProductsList = setProduct(res);
     notifyListeners();
-    return items;
+    return searchedProductsList;
   }
 
   Future<int> getProductCount() async {

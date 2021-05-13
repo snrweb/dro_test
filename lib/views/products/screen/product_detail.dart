@@ -1,6 +1,8 @@
+import 'package:dro_test/constants/constants.dart';
 import 'package:dro_test/schemas/product_schema.dart';
 import 'package:dro_test/views/products/screen/cart_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -27,6 +29,7 @@ class _ProductDetailState extends State<ProductDetail> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(Constants.UI_OVERLAY);
     _productProvider = Provider.of<ProductProvider>(context);
     var formatPrice = NumberFormat.currency(locale: "en_US", name: "N");
 

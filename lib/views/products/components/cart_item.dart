@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../../schemas/product_schema.dart';
 
+// ignore: must_be_immutable
 class CartItem extends StatefulWidget {
   CartItem({this.scaffoldKey, this.productProvider});
 
